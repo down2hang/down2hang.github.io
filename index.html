@@ -1,0 +1,269 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <body>
+    <!-- Event Display Buttons -->
+    <div id="eDisplayBtns" class="btn-block" role="group">
+      <!--button type="button" class="btn btn-primary btn-lg btn-block" >Event1</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block">event2</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block">event3</button-->
+    </div>
+    <!-- END Event Display Buttons -->
+
+    <!-- Button to trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Add Event
+    </button>
+    <!-- END Button to trigger modal -->
+
+    <!-- New Event Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Start New Event!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="newEventInfo" onsubmit="processNewEvent()" style="text-align: center; position: relative">
+
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="firstname" placeholder="Your first name.." required>
+
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email" placeholder="stevejobs@gmail.com" required>
+
+              <label for="minpart">Minimum Participants</label>
+              <input type="text" id="minipart" name="minipart" placeholder='0' required>
+
+              
+              <label for="maxpart">Maximum Participants</label>
+              <input type="text" id="maxpart" name="maxpart" placeholder='100' required>
+
+
+              <label for="ename">Event Title</label>
+              <input type="text" id="ename" name="maxpart" placeholder='John Doe' required>
+
+              <label for="etime">Event Time</label>
+              <input type="text" id="etime" name="eventtime" placeholder="00:00:0000" required>
+
+              <label for="elocation">Event Location</label>
+              <input type="text" id="elocation" name="eventlocation" placeholder="Buckingham Palace" required>
+
+              <label for="edesc">Event Description</label>
+              <textarea id="edesc" name="edesc" placeholder="Write something.." style="height:200px" required></textarea>
+
+              <input type="button" value="Submit" onclick="go()">
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END New Event Modal -->
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+function apicall(d) {
+  fetch("https://hwzgmbb5mg.execute-api.us-east-1.amazonaws.com/test/check", {
+    method:"POST",
+    body: JSON.stringify({
+  "Description": d.Description,
+  "EventID": d.EventID,
+  "Location": d.Location,
+  "Participants": d.Participants,
+  "Time": d.Time,
+  "Title": d.Title,
+  "max": parseInt(d.max),
+  "min": parseInt(d.min)
+})
+  });
+}</script>
+
+    <script>
+    let config = {
+      apiKey: "AIzaSyC8iaO8kb95S5mnUa2WLSCrCO-2Vq7RWiE",
+      authDomain: "amherst-hangout.firebaseapp.com",
+      projectId: "amherst-hangout",
+      databaseURL: "https://amherst-hangout-default-rtdb.firebaseio.com/",
+    };
+
+
+    function createHangout(eventID, eventTitle, eventTime, eventLocation, eventMin, eventMax, eventDescription) {
+      let config = {
+        apiKey: "AIzaSyC8iaO8kb95S5mnUa2WLSCrCO-2Vq7RWiE",
+        authDomain: "amherst-hangout.firebaseapp.com",
+        projectId: "amherst-hangout",
+        databaseURL: "https://amherst-hangout-default-rtdb.firebaseio.com/",
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+      this.database = firebase.database();
+      let userRef = this.database.ref('Events/');
+
+      let emptylist = [];
+
+
+      userRef.child(eventID).set({
+        'EventID': eventID,
+          'Time': eventTime,
+          'Location': eventLocation,
+          'Title' : eventTitle,
+          'Description': eventDescription,
+          'min': eventMin,
+          'max': eventMax,
+          'Participants' : emptylist
+      });
+
+      console.log('this method finished.')
+
+    }
+
+    function getEventInfo() {
+      var eventsData;
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+      this.database = firebase.database();//not desired JSON data
+
+      let userRef = this.database.ref('Events/');//not desired JSON data 
+
+      userRef.on("value", 
+      function(snapshot) {
+        eventsData=snapshot.val();
+      },
+      function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
+      );
+      return eventsData;
+    }
+
+
+    function addParticipant(eventID,name,email) {
+      let config = {
+        apiKey: "AIzaSyC8iaO8kb95S5mnUa2WLSCrCO-2Vq7RWiE",
+        authDomain: "amherst-hangout.firebaseapp.com",
+        projectId: "amherst-hangout",
+        databaseURL: "https://amherst-hangout-default-rtdb.firebaseio.com/",
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+      this.database = firebase.database();
+
+
+      let userRef = this.database.ref('Events/' + eventID);
+
+      // emptylist = [];
+      // //Create participants list
+      // userRef.child('Participants').set(emptylist)
+
+      // Update (push participant to list)
+      userRef.child('Participants').push({'Name': name, 'Email':email})
+
+      userRef.on("value", function(snapshot) {
+
+
+
+        var requestData = snapshot.val(); 
+
+        apicall(requestData);
+        console.log(requestData.Participants);
+
+
+      }
+
+
+
+      , function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+      });
+        var requestData = {
+
+        }
+  
+
+    }
+
+
+    function go(){
+      //event.preventDefault();
+      var fname=document.getElementById("fname").value.toString();
+      var lname=document.getElementById("lname").value.toString();
+      var email=document.getElementById("email").value.toString();
+      var minipart=document.getElementById("minipart").value.toString();
+      var maxpart=document.getElementById("maxpart").value.toString();
+      var ename=document.getElementById("ename").value.toString();
+      var etime=document.getElementById("etime").value.toString();
+      var elocation=document.getElementById("elocation").value.toString();
+      var edesc=document.getElementById("edesc").value.toString();
+      document.getElementById("newEventInfo").reset();
+      var numEvents = Math.round(Math.random()*4206969);//EDIT THIS SHIT LATER!!
+      createHangout(numEvents, ename, etime, elocation, minipart, maxpart, edesc);
+      console.log(numEvents);
+      addParticipant(numEvents,fname+' '+lname,email);
+    }
+
+    function displayEvents(){
+      console.log("displayEvents called");
+      var eventsData;
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+      this.database = firebase.database();//not desired JSON data
+
+      let userRef = this.database.ref('Events/');//not desired JSON data 
+
+      userRef.on("value", 
+        function(snapshot) {
+          document.getElementById("eDisplayBtns").innerHTML = "";
+          eventsData=snapshot.val();
+          for (event in eventsData){
+            console.log(event);
+            console.log(eventsData[event].Title);
+            var eventButton = document.createElement('BUTTON');
+            eventButton.innerHTML = 'Event ID: ' + event + ' || '+ eventsData[event].Title + ': ' + eventsData[event].Description +' || at ' +eventsData[event].Time;
+            document.getElementById("eDisplayBtns").appendChild(eventButton);
+          }
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        }
+      );
+    }
+
+    function displayHomePage(){
+      console.log("displayHomePage called");
+      displayEvents();
+    }
+
+    displayHomePage(); //Home page's content depends on data that is loaded through scripts, so better to show it after loading
+    console.log("end of scripts");
+  </script>
+  </body>
+</html>
