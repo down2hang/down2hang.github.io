@@ -302,7 +302,7 @@ function apicall(d) {
           eventsData=snapshot.val();
           for (event in eventsData){
             var eventButton = document.createElement('BUTTON');
-            eventButton.innerHTML = 'Event ID: ' + event + ' || '+ eventsData[event].Title + ': ' + eventsData[event].Description +' || at ' +eventsData[event].Time;
+            eventButton.innerHTML = 'Event ID:\t\t\t ' + event + ' || '+ eventsData[event].Title + ': ' + eventsData[event].Description +' || at ' +eventsData[event].Time;
             eventButton.className = "btn btn-primary btn-lg btn-block";
             eventButton.type = "button";
             eventButton.id = eventsData[event].EventID;
