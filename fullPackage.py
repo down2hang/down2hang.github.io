@@ -76,7 +76,7 @@ def greaterThanMin(j: json):
     if len(jParsed["Participants"]) == int(jParsed["min"]):
         sendEmail(JSONtoEvent(j))
         return True
-    elif len(jParsed["Participants"]) == int(jParsed["min"]):
+    elif len(jParsed["Participants"]) > int(jParsed["min"]):
         sendEmailToLast(JSONtoEvent(j))
         return False
 
