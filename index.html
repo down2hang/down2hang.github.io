@@ -10,49 +10,59 @@
         overflow: auto;
       }
       .no-pad-no-margin{
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        margin: 0;
+        padding: 0 !important;
       }
       .hide{
         display: none;
       }
     </style>
-  <body>
-    <div class="no-pad-no-margin">
-      <div class="row no-pad-no-margin">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 scrolly justify-content-center">
-          <!-- Event Display Buttons -->
-          <div id="eDisplayBtns" class="btn-block" role="group">
-          </div>
-          <!-- END Event Display Buttons -->
-
-          <br>
-
-          <!-- Button to trigger add event modal -->
-          <button type="button" class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
-            Add Event
-          </button>
-          <!-- END Button to trigger add event modal -->
+  <body class= "jumbotron no-pad-no-margin">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Down2Hang</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link " data-toggle="modal" data-target="#aboutModal">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/down2hang/down2hang.github.io">Source</a>
+            </li>
+          </ul>
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="alertNotSupported()">Login</button>
         </div>
-        <div id="rightCol" class="col-lg-6 col-md-6 col-sm-6 col-xs-6  scrolly">
-          <div id="eInfoSpace">
-            <h1 class = "text-center">Hover Over An Event Or Make A New One On The Left To Get Started!</h1>
-          </div>
-
-          <br>
-
-          <!-- Button to trigger join event modal -->
-          <button id="joinEventBtn" type="button" class="btn btn-outline-primary btn-lg btn-block hide" data-toggle="modal" data-target="#joinEventModal">
-            Join Event
-          </button>
-          <!-- END Button to trigger join event modal -->
+    </nav>
+    <div class=" pt-5 mt-3 row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 scrolly border pt-2">
+        <!-- Event Display Buttons -->
+        <div id="eDisplayBtns" class="btn-block" role="group">
         </div>
+        <!-- END Event Display Buttons -->
+
+        <br>
+
+        <!-- Button to trigger add event modal -->
+        <button type="button" class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+          Add Event
+        </button>
+        <!-- END Button to trigger add event modal -->
+        <br>
+        <br>
+      </div>
+      <div id="rightCol" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 scrolly border pt-2">
+        <div id="eInfoSpace" class = "lead">
+          <h1 class = "display-4 text-center">Hover Over An Event Or Make A New One On The Left To Get Started!</h1>
+        </div>
+
+        <br>
+
+        <!-- Button to trigger join event modal -->
+        <button id="joinEventBtn" type="button" class="btn btn-outline-primary btn-lg btn-block hide" data-toggle="modal" data-target="#joinEventModal">
+          Join Event
+        </button>
+        <!-- END Button to trigger join event modal -->
       </div>
     </div>
-
-
 
 
     <!-- New Event Modal -->
@@ -60,7 +70,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Start New Event!</h5>
+            <h2 class="modal-title" id="exampleModalLabel">Start New Event!</h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -79,28 +89,28 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Last Name</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="lname" name="lastname" placeholder="Your last name.." required>
+                  <input type="text" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="lname" name="lastname" placeholder="Your last name.." required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Email</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="email" name="email" placeholder="stevejobs@gmail.com" required>
+                  <input type="email" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="email" name="email" placeholder="stevejobs@gmail.com" required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Minimum Participants</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="minipart" name="minipart" placeholder='0' required>
+                  <input type="number" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="minipart" name="minipart" placeholder='0' required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Maximum Participants</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="maxpart" name="maxpart" placeholder='100' required>
+                  <input type="number" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="maxpart" name="maxpart" placeholder='100' required>
                 </div>
 
 
@@ -115,14 +125,14 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Event Time</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="etime" name="eventtime" placeholder="00:00:0000" required>
+                  <input type="time" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="etime" name="eventtime" placeholder="00:00:0000" required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Event Location</span>
                   </div>
-                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="elocation" name="eventlocation" placeholder="Buckingham Palace" required>
+                  <input type="text" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="elocation" name="eventlocation" placeholder="Buckingham Palace" required>
                 </div>
 
                 <div class="input-group">
@@ -134,7 +144,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" value="Submit" onclick="go()" class="btn btn-secondary" data-dismiss="modal">Create Event</button>
+            <button type="button" type = "Submit" value="Submit" onclick="go()" class="btn btn-secondary" data-dismiss="modal">Create Event</button>
           </div>
         </div>
       </div>
@@ -146,7 +156,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Join An Event!</h5>
+            <h2 class="modal-title" id="exampleModalLabel">Join An Event!</h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -154,31 +164,63 @@
           <div class="modal-body">
             <form id="joinEventForm" onsubmit="joinEvent()" style="text-align: center; position: relative">
 
-              <label for="fname">First Name</label>
-              <input type="text" id="fnameadd" name="firstname" placeholder="Your first name.." required>
-              <br>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">First Name</span>
+                </div>
+                  <input type="text" id="fnameadd" class="form-control" name="firstname" placeholder="Your first name.." aria-label="Username" aria-describedby="basic-addon1" required>
+              </div>
 
-              <label for="lname">Last Name</label>
-              <input type="text" id="lnameadd" name="lastname" placeholder="Your last name.." required>
-              <br>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Last Name</span>
+                </div>
+                <input type="text" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="lnameadd" name="lastname" placeholder="Your last name.." required>
+              </div>
 
-              <label for="email">Email</label>
-              <input type="text" id="emailadd" name="email" placeholder="stevejobs@gmail.com" required>
-              <br>
-
-              <label for="eID">Event ID</label>
-              <input type="text" id="eidadd" name="firstname" placeholder="The event ID" required>
-              <br>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Email</span>
+                </div>
+                <input type="email" aria-label="Username" class="form-control" aria-describedby="basic-addon1" id="emailadd" name="email" placeholder="stevejobs@gmail.com" required>
+              </div>
 
             </form>
           </div>
           <div class="modal-footer">
-            <button id="joinEventSubmission" type="button" value="Submit" onclick="joinEvent()" class="btn btn-secondary" data-dismiss="modal">Join</button>
+            <button id="joinEventSubmission" type="submit" value="Submit" onclick="joinEvent()" class="btn btn-secondary" data-dismiss="modal">Join</button>
           </div>
         </div>
       </div>
     </div>
     <!-- END Join Event Modal -->
+
+    <!-- About Modal -->
+    <div class="modal fade bd-example-modal-lg" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">About</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3 class = "text-center">What does it do?</h3>
+            <a>Down2Hang allows people to post and join events on our website and notifies people once the event has reached the specified minimum number of participants. No more showing up to frisbee practice and only finding 5 people there. Down2Hang keeps track of intended attendance and tells all participants when the minimum has been met, so people can confidently attend, knowing it's worth it. This is also a great way to find cool things to do and meet new people!</a>
+            <br>
+            <br>
+            <h3 class = "text-center">Why is this cool?</h3>
+            <a>We are a bunch of Amherst College ultimate frisbee players who also happen to love programming. We joined forces for the MLE New Year's Hackathon to solve a common problem amongst us. Getting enough people to come to frisbee practice can be a challenge. It's especially annoying when you need 14 players, for practice to be worthwhile. The pandemic made this even harder.<br><br>We hope that in the new year, after the pandemic, our website can be used to organize events for groups of people who want to (safely) coordinate fun activities. It's also a great way to make new friends in the new year.</a>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END About Modal -->
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -205,6 +247,9 @@ function apicall(d) {
 }</script>
 
     <script>
+    function alertNotSupported(){
+      alert("This function is not supported in this application of Down2Hang. Logins allow for users to see events specific to them or a select group of interest. Check back later for updates. Thanks for your understanding!")
+    }
     let config = {
       apiKey: "AIzaSyC8iaO8kb95S5mnUa2WLSCrCO-2Vq7RWiE",
       authDomain: "amherst-hangout.firebaseapp.com",
@@ -370,16 +415,19 @@ function apicall(d) {
               desc.innerHTML = "Description: " + dataMess[this.id].Description;
               var eTitle = document.createElement('h1');
               eTitle.innerHTML = dataMess[this.id].Title;
-              eTitle.className = "text-center";
+              eTitle.className = "display-4 text-center";
               var eTime = document.createElement('h5');
               eTime.innerHTML = "Time(military standard): @" + dataMess[this.id].Time;
               var eLocation = document.createElement('h5');
               eLocation.innerHTML = "Location: " + dataMess[this.id].Location;
               var numPpl = document.createElement('h5');
               numPpl.innerHTML = "Number of Participants: " + Object.keys(dataMess[this.id].Participants).length;
+              var hr = document.createElement("hr");
+              hr.className = "my-4";
               var eInfoSpace = document.getElementById("eInfoSpace");
               eInfoSpace.innerHTML= "";
               eInfoSpace.appendChild(eTitle);
+              eInfoSpace.appendChild(hr);
               eInfoSpace.appendChild(desc);
               eInfoSpace.appendChild(eLocation);
               eInfoSpace.appendChild(eTime);
