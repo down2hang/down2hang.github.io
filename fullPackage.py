@@ -73,10 +73,11 @@ def sendEmail(event):
 #DETERMINE FROM JSON if minpart is reached
 def greaterThanMin(j: json):
     jParsed = json.loads(j)
-    if len(jParsed["Participants"]) >= int(jParsed["min"]):
+    if len(jParsed["Participants"]) == int(jParsed["min"]):
         sendEmail(JSONtoEvent(j))
         return True
-    else:
+    elif len(jParsed["Participants"]) == int(jParsed["min"]):
+        sendEmailToLast(JSONtoEvent(j))
         return False
 
 
@@ -87,6 +88,48 @@ def lessThanMax(j: json):
     else:
         return False
 
+
+def sendEmailToLast(event):
+
+    sender_email = 'frisboysproject@gmail.com'
+    password = 'amherst123' 
+    participants=event.participants
+    
+
+    receiver_emails = []
+    receiver_emails.append(participants[-1].getEmail())
+
+
+    names=[]
+    for p in participants:
+        names.append(p.getName())
+
+
+    # Email text
+    email_body = '''Subject: Your Hangout Event\n
+    \nHello, you have an update from Hangout!
+    '''
+
+    email_body+=('\nYour event is on!\n\n' +"\nTime: "+event.time+ "\nTitle: " + event.title + "\nDescription: " + event.description+ "\nLocation: " + event.location +"\n\nParticipants:\n")
+
+    for count, name in enumerate(names):
+        email_body+=("\n"+str(count)+". "+  name)
+
+    email_body += ("\n\n\nSee you there!")
+    
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+    server.login(sender_email, password)
+    # Sending email from sender, to receiver with the email body
+    server.sendmail(sender_email, receiver_emails, email_body)
+    print('Email sent!')
+
+    print('Closing the server...')
+    server.quit()
 
 
 
