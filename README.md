@@ -21,7 +21,7 @@ Down2Hang allows people to post and join events on our website and notifies peop
 ## Join Events
 ![Join Events](screenshots/5.png)
 ## Get notified when your event has enough people to start.
-Nobody interested? no event :(
+Nobody interested? no event :( <br>
 Enough people interested? We'll make sure you know!
 ![Get notified when your event has enough people to start. Nobody interested? no event... people interested? We'll make sure you know!](screenshots/3.png)
 
