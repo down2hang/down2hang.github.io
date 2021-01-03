@@ -4,26 +4,56 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      .scrolly{
+        height: 600px;
+        overflow: auto;
+      }
+      .no-pad-no-margin{
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .hide{
+        display: none;
+      }
+    </style>
   <body>
-    <!-- Event Display Buttons -->
-    <div id="eDisplayBtns" class="btn-block" role="group">
-      <!--button type="button" class="btn btn-primary btn-lg btn-block" >Event1</button>
-      <button type="button" class="btn btn-primary btn-lg btn-block">event2</button>
-      <button type="button" class="btn btn-primary btn-lg btn-block">event3</button-->
+    <div class="no-pad-no-margin">
+      <div class="row no-pad-no-margin">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 scrolly justify-content-center">
+          <!-- Event Display Buttons -->
+          <div id="eDisplayBtns" class="btn-block" role="group">
+          </div>
+          <!-- END Event Display Buttons -->
+
+          <br>
+
+          <!-- Button to trigger add event modal -->
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+            Add Event
+          </button>
+          <!-- END Button to trigger add event modal -->
+        </div>
+        <div id="rightCol" class="col-lg-6 col-md-6 col-sm-6 col-xs-6  scrolly">
+          <div id="eInfoSpace">
+            <h1 class = "text-center">Hover Over An Event Or Make A New One On The Left To Get Started!</h1>
+          </div>
+
+          <br>
+
+          <!-- Button to trigger join event modal -->
+          <button id="joinEventBtn" type="button" class="btn btn-outline-primary btn-lg btn-block hide" data-toggle="modal" data-target="#joinEventModal">
+            Join Event
+          </button>
+          <!-- END Button to trigger join event modal -->
+        </div>
+      </div>
     </div>
-    <!-- END Event Display Buttons -->
 
-    <!-- Button to trigger modal -->
-    <button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
-      Add Event
-    </button>
-    <!-- END Button to trigger modal -->
 
-    <!-- Button to trigger join event modal -->
-    <button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#joinEventModal">
-      Join An Event
-    </button>
-    <!-- END Button to trigger join event modal -->
+
 
     <!-- New Event Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,51 +68,69 @@
           <div class="modal-body">
             <form id="newEventInfo" onsubmit="go()" style="text-align: center; position: relative">
 
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">First Name</span>
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">First Name</span>
+                  </div>
+                  <input type="text" id="fname" class="form-control" name="firstname" placeholder="Your first name.." aria-label="Username" aria-describedby="basic-addon1" required>
                 </div>
-                <input type="text" id="fname" class="form-control" name="firstname" placeholder="Your first name.." aria-label="Username" aria-describedby="basic-addon1" required>
-              </div>
-              <br>
 
-              <label for="lname">Last Name</label>
-              <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
-              <br>
-
-              <label for="email">Email</label>
-              <input type="text" id="email" name="email" placeholder="stevejobs@gmail.com" required>
-              <br>
-
-              <label for="minpart">Minimum Participants</label>
-              <input type="text" id="minipart" name="minipart" placeholder='0' required>
-              <br>
-
-              
-              <label for="maxpart">Maximum Participants</label>
-              <input type="text" id="maxpart" name="maxpart" placeholder='100' required>
-              <br>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Event Title</span>
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Last Name</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="lname" name="lastname" placeholder="Your last name.." required>
                 </div>
-                <input type="text" id="ename" name="maxpart" placeholder='John Doe'class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>
-              </div>
-              <br>
 
-              <label for="etime">Event Time</label>
-              <input type="text" id="etime" name="eventtime" placeholder="00:00:0000" required>
-              <br>
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="email" name="email" placeholder="stevejobs@gmail.com" required>
+                </div>
 
-              <label for="elocation">Event Location</label>
-              <input type="text" id="elocation" name="eventlocation" placeholder="Buckingham Palace" required>
-              <br>
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Minimum Participants</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="minipart" name="minipart" placeholder='0' required>
+                </div>
 
-              <label for="edesc">Event Description</label>
-              <textarea id="edesc" name="edesc" placeholder="Write something.." style="height:200px" required></textarea>
-              <br>
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Maximum Participants</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="maxpart" name="maxpart" placeholder='100' required>
+                </div>
 
+
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Event Title</span>
+                  </div>
+                  <input type="text" id="ename" name="maxpart" placeholder='John Doe'class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Event Time</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="etime" name="eventtime" placeholder="00:00:0000" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Event Location</span>
+                  </div>
+                  <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="elocation" name="eventlocation" placeholder="Buckingham Palace" required>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Event Description</span>
+                  </div>
+                  <textarea class="form-control" aria-label="With textarea"name="edesc" placeholder="Write something.." id= "edesc" style="height:200px" required></textarea>
+                </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -125,7 +173,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" value="Submit" onclick="joinEvent()" class="btn btn-secondary" data-dismiss="modal">Join</button>
+            <button id="joinEventSubmission" type="button" value="Submit" onclick="joinEvent()" class="btn btn-secondary" data-dismiss="modal">Join</button>
           </div>
         </div>
       </div>
@@ -286,7 +334,7 @@ function apicall(d) {
 
 
     function joinEvent(){
-      var eid=document.getElementById("eidadd").value.toString();
+      var eid=document.getElementById("joinEventSubmission").name;
       var fname=document.getElementById("fnameadd").value.toString();
       var lname=document.getElementById("lnameadd").value.toString();
       var email=document.getElementById("emailadd").value.toString();
@@ -295,6 +343,7 @@ function apicall(d) {
     }
 
 
+    var allData;
     function displayEvents(){
       var eventsData;
       if (!firebase.apps.length) {
@@ -309,12 +358,39 @@ function apicall(d) {
         function(snapshot) {
           document.getElementById("eDisplayBtns").innerHTML = "";
           eventsData=snapshot.val();
+          dataMess=eventsData;
           for (event in eventsData){
             var eventButton = document.createElement('BUTTON');
-            eventButton.innerHTML = 'Event ID: ' + event + ' || '+ eventsData[event].Title + ': ' + eventsData[event].Description +' || at ' +eventsData[event].Time;
-            eventButton.className = "btn btn-primary btn-lg btn-block";
+            eventButton.innerHTML = eventsData[event].Title;
+            eventButton.className = "btn btn-primary btn-lg btn-block rounded-lg border";
             eventButton.type = "button";
             eventButton.id = eventsData[event].EventID;
+            eventButton.onmouseover = function showEvent(){
+              var desc = document.createElement('h5');
+              desc.innerHTML = "Description: " + dataMess[this.id].Description;
+              var eTitle = document.createElement('h1');
+              eTitle.innerHTML = dataMess[this.id].Title;
+              eTitle.className = "text-center";
+              var eTime = document.createElement('h5');
+              eTime.innerHTML = "Time(military standard): @" + dataMess[this.id].Time;
+              var eLocation = document.createElement('h5');
+              eLocation.innerHTML = "Location: " + dataMess[this.id].Location;
+              var numPpl = document.createElement('h5');
+              numPpl.innerHTML = "Number of Participants: " + Object.keys(dataMess[this.id].Participants).length;
+              var eInfoSpace = document.getElementById("eInfoSpace");
+              eInfoSpace.innerHTML= "";
+              eInfoSpace.appendChild(eTitle);
+              eInfoSpace.appendChild(desc);
+              eInfoSpace.appendChild(eLocation);
+              eInfoSpace.appendChild(eTime);
+              eInfoSpace.appendChild(numPpl);
+              //make join event btn visible
+              var joinEBtn = document.getElementById("joinEventBtn");
+              joinEBtn.innerHTML = "Join "+ eTitle.innerHTML+"!";
+              joinEBtn.style.display = "initial";
+              //store active event id in submit button's name
+              document.getElementById("joinEventSubmission").name = this.id;
+            }
             document.getElementById("eDisplayBtns").appendChild(eventButton);
           }
         },
